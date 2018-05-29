@@ -1,0 +1,10 @@
+Services:
+   UploadService
+      - uploadFile(fil)
+   DataService
+      - getData()
+
+Components:
+   - LoginComponent
+   - DataListComponent
+   - UploadComponent
