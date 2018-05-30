@@ -1,0 +1,32 @@
+.login-form {
+margin: 100px 30% 0 30%;
+  width: 30%;
+  background: rgba(100, 149, 237, 0.73);
+  padding: 30px 30px 50px 30px;
+  border-radius: 15px;
+}
+.main-content {
+
+  height: 100vh;
+}
+#logout-button {
+  background-color: darkblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  margin: 10px 8% 0px 92%;
+  font-weight: 500;
+  border-radius: 10px;
+
+}
+#logout-button:hover {
+  background-color: #0000d9;
+}
+#datalist-container {
+ background-color: white;
+  height: 80vh;
+  width: 80%;
+  margin: 40px 10%;
+  border-radius: 5px;
+
+}
