@@ -9,6 +9,7 @@ import { DataService } from "./data.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'app';
 
   files = [];
@@ -23,4 +24,6 @@ export class AppComponent {
       console.log(this.files);
     })
   }
+ }
+
 }
