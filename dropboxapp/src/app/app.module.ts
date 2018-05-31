@@ -7,6 +7,8 @@ import { DatalistComponent } from './datalist/datalist.component';
 import { UploadComponent } from './upload/upload.component';
 import { DataitemComponent } from './dataitem/dataitem.component';
 
+import { DataService } from "./data.service";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,9 +18,11 @@ import { DataitemComponent } from './dataitem/dataitem.component';
     DataitemComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
-  providers: [],
+  providers: [
+    DataService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
