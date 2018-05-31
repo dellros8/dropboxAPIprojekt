@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 
 import 'isomorphic-fetch';
 
-var Dropbox = require('dropbox').Dropbox;
+const Dropbox = require('dropbox').Dropbox;
 
 import { BehaviorSubject } from 'rxjs';
 
