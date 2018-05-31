@@ -1,5 +1,5 @@
 .login-form {
-margin: 100px 30% 0 30%;
+  margin: 100px 30% 0 30%;
   width: 30%;
   background: rgba(100, 149, 237, 0.73);
   padding: 30px 30px 50px 30px;
@@ -9,24 +9,26 @@ margin: 100px 30% 0 30%;
 
   height: 100vh;
 }
-#logout-button {
+
+button {
   background-color: darkblue;
   color: white;
   padding: 15px 20px;
   border: none;
-  margin: 10px 8% 0px 92%;
   font-weight: 500;
   border-radius: 10px;
+  margin: 15px 0px 0px 15px;
 
 }
-#logout-button:hover {
+button:hover {
   background-color: #0000d9;
+  cursor: pointer;
 }
 #datalist-container {
  background-color: white;
   height: 80vh;
-  width: 80%;
-  margin: 40px 10%;
-  border-radius: 5px;
+  width: 100%;
+  margin: 40px 0px;
+
 
 }
