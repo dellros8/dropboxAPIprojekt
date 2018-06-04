@@ -12,8 +12,6 @@ export class AppComponent {
 
   files = [];
 
-  uploadFile: FileList;
-
   constructor(private dataService: DataService) {
     this.dataService.getFiles()
   }
@@ -23,19 +21,6 @@ export class AppComponent {
       this.files = files;
       console.log(this.files);
     })
-  }
-
-  uploadFiles(event) {
-    this.uploadFile = event.target.files
-    let file = this.uploadFile[0]
-
-    this.dataService.dbx.filesUpload({path: '/' + file.name, contents: file})
-    .then(function(response) {
-      console.log("uploaded file!!");
-    })
-    .catch(function(error) {
-      console.error(error);
-    });
   }
 
 }

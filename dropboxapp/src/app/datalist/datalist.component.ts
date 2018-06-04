@@ -16,8 +16,7 @@ export class DatalistComponent implements OnInit {
     this.dataservice.stream
       .subscribe((files) => {
         this.itemArray = files;
-        console.log(this.itemArray);
-
+        
       });
   }
 
