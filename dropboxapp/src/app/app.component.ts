@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { DataService } from "./data.service";
+
 
 
 @Component({
@@ -9,9 +9,9 @@ import { DataService } from "./data.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
 
-  files = [];
+  constructor() {}
+}
 
   uploadFile: FileList;
 
@@ -26,11 +26,8 @@ export class AppComponent {
     })
   }
 
-  getFiles(event) {
-    this.uploadFile = event.target.files
-  }
-
   uploadFiles() {
+    this.uploadFile = event.target.files
     let file = this.uploadFile[0]
 
     this.dataService.dbx.filesUpload({path: '/' + file.name, contents: file})

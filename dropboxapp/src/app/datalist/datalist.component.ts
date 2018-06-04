@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-datalist',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datalist.component.css']
 })
 export class DatalistComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
+  itemArray = [];
+  constructor(private dataservice: DataService) {
+    this.dataservice.getFiles();
   }
 
-}
+  ngOnInit() {
+    this.dataservice.stream
+      .subscribe((files) => {
+        this.itemArray = files;
+        console.log(this.itemArray);
+
+      });
+  }
+
+  }
+
+

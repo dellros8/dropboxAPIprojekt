@@ -1,9 +1,9 @@
-<input type="file" (change)="getFiles($event)">
-<button (click)="uploadFiles()">UPLOAD</button>
-<div>
-  <p *ngFor="let file of files">
-    {{file.name}}
-    {{file.server_modified}}
-    {{file.size}}
-  </p>
-</div>
+<div class="main-content">
+  <button id="logout-button">Logout</button>
+  <input type="file" (change)="uploadFiles($event)" id="upload-button">Upload</button>
+
+  <div id="datalist-container">
+   <app-datalist></app-datalist>
+  </div>
+
+</div
