@@ -8,15 +8,19 @@ import { DataService } from '../data.service';
 })
 export class DatalistComponent implements OnInit {
   itemArray = [];
-  constructor(private dataservice: DataService) { }
+  constructor(private dataservice: DataService) {
+    this.dataservice.getFiles();
+  }
 
   ngOnInit() {
-    this.dataservice.returnItems()
-      .subscribe((items) => {
-        this.itemArray = items;
+    this.dataservice.stream
+      .subscribe((files) => {
+        this.itemArray = files;
+        console.log(this.itemArray);
+
       });
   }
 
   }
 
-}
+
