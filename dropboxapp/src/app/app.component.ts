@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-
+import { DataService } from "./data.service";
 
 
 @Component({
@@ -10,8 +10,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  constructor() {}
-}
+  files = [];
 
   uploadFile: FileList;
 
@@ -26,7 +25,7 @@ export class AppComponent {
     })
   }
 
-  uploadFiles() {
+  uploadFiles(event) {
     this.uploadFile = event.target.files
     let file = this.uploadFile[0]
 
