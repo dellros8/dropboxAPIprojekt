@@ -16,6 +16,7 @@ export class DataService {
   list = [];
 
 
+
   constructor() {
     this.dbx = new Dropbox({ accessToken: 'o6_f4NF_pIAAAAAAAAAABz8hX_Q0CxwZQag2M9E5v0-KleP2Bzp1ynSv5nBaV25v' });
     this.stream = new BehaviorSubject(this.list);
@@ -28,4 +29,7 @@ export class DataService {
         this.stream.next(this.list);
       });
   }
+
+  
+
 }

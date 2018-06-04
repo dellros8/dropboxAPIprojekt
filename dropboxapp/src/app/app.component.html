@@ -1,3 +1,5 @@
+<input type="file" (change)="getFiles($event)">
+<button (click)="uploadFiles()">UPLOAD</button>
 <div>
   <p *ngFor="let file of files">
     {{file.name}}
