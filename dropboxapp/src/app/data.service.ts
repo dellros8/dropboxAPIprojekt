@@ -31,6 +31,32 @@ export class DataService {
       });
   }
 
+  downloadFile(path) {
+    // const ACCESS_TOKEN = (<HTMLInputElement> document.getElementById('access-token')).value;
+    // const SHARED_LINK = (<HTMLInputElement> document.getElementById('shared-link')).value;
+
+    this.dbx.filesGetTemporaryLink({path: path})
+      .then(function(data) {
+        // NOTE: The Dropbox SDK specification does not include a fileBlob
+        // field on the FileLinkMetadataReference type, so it is missing from
+        // the TypeScript type. This field is injected by the Dropbox SDK.
+
+        window.open(data.link, '_blank');
+        const downloadUrl = URL.createObjectURL((<any> data).fileBlob);
+        const downloadButton = document.createElement('a');
+        downloadButton.setAttribute('href', downloadUrl);
+        downloadButton.setAttribute('download', data.name);
+        downloadButton.setAttribute('class', 'button');
+        downloadButton.innerText = 'Download: ' + data.name;
+        document.getElementById('results').appendChild(downloadButton);
+
+      })
+      .catch(function(error) {
+      });
+    return false;
+  }
+
+
   uploadFiles(event) {
     this.uploadFile = event.target.files
     let file = this.uploadFile[0]
@@ -43,5 +69,6 @@ export class DataService {
         console.error(error);
       });
   }
+
 
 }
