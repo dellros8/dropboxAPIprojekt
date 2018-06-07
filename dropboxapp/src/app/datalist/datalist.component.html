@@ -6,7 +6,7 @@
 </div>
 
 
-<div *ngFor="let breadcrumb of breadcrumbs">{{breadcrumb}}</div>
+<div *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)">{{breadcrumb}}</div>
 
 <div id="itemArrayContainer">
 <div *ngFor="let item of itemArray" class="row datalist-items" (click)="download(item.path_lower, item['.tag'])">

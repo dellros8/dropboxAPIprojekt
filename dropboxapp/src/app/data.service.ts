@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Path } from "./constants";
 
 import 'isomorphic-fetch';
 
@@ -12,6 +13,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class DataService {
   stream;
+  public pathm;
   dbx;
   list = [];
 
@@ -62,8 +64,7 @@ export class DataService {
   uploadFiles(event) {
     this.uploadFile = event.target.files;
     let file = this.uploadFile[0];
-
-    this.dbx.filesUpload({ path: '/' + file.name, contents: file })
+    this.dbx.filesUpload({ path: this.pathm + "/" + file.name, contents: file })
       .then(() => {
         console.log('uploaded file!!');
       })
@@ -73,6 +74,9 @@ export class DataService {
   }
 
 
+  getThumbnails() {
+    this.dbx.getThumbnails({ })
+  }
 
 
 }
