@@ -29,6 +29,8 @@ export class DataService {
         this.list = response.entries;
         this.stream.next(this.list);
       });
+
+
   }
 
   downloadFile(path) {
@@ -69,6 +71,8 @@ export class DataService {
         console.error(error);
       });
   }
+
+
 
 
 }

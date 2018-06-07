@@ -19,7 +19,6 @@ export class AppComponent {
     this.dataService.stream
     .subscribe((files) => {
       this.files = files;
-      console.log(this.files);
     })
   }
 
