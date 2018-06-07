@@ -6,7 +6,7 @@
 </div>
 
 
-
+<div id="itemArrayContainer">
 <div *ngFor="let item of itemArray" class="row datalist-items" (click)="download(item.path_lower, item['.tag'])">
   <div class="col-sm-1">
    <!-- <img src="{{item.path_lower}}" class="img-icon">-->
@@ -25,3 +25,4 @@
 
 </div>
 
+</div>
