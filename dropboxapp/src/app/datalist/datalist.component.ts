@@ -19,8 +19,12 @@ export class DatalistComponent implements OnInit {
         console.log(this.itemArray);
 
       });
-  }
-
+   }
+download(path, filetype) {
+    if(filetype === 'file') {
+      this.dataservice.downloadFile(path);
+    }
+}
   }
 
 
