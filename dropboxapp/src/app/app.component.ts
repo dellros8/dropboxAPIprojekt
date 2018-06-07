@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { DataService } from "./data.service";
+import { DataService } from './data.service';
 
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent {
   files = [];
 
   constructor(private dataService: DataService) {
-    this.dataService.getFiles()
+    this.dataService.getFiles();
   }
   ngOnInit() {
     this.dataService.stream

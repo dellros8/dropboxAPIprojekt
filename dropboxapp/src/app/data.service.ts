@@ -60,12 +60,12 @@ export class DataService {
 
 
   uploadFiles(event) {
-    this.uploadFile = event.target.files
-    let file = this.uploadFile[0]
+    this.uploadFile = event.target.files;
+    let file = this.uploadFile[0];
 
     this.dbx.filesUpload({ path: '/' + file.name, contents: file })
       .then(() => {
-        console.log("uploaded file!!");
+        console.log('uploaded file!!');
       })
       .catch(function (error) {
         console.error(error);
