@@ -30,6 +30,7 @@ export class DataService {
       .then((response) => {
         this.list = response.entries;
         this.stream.next(this.list);
+
       });
 
 

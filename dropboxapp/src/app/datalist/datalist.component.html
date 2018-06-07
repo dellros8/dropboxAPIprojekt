@@ -1,8 +1,8 @@
 <div class="row" id="datalist-titels">
   <div class="col-sm-1"><strong>Filetype</strong></div>
-  <div class="col-sm-7"><strong>Filename</strong></div>
+  <div class="col-sm-6"><strong>Filename</strong></div>
   <div class="col-sm-2"><strong>Last Modified</strong></div>
-  <div class="col-sm-2"><strong>File Size</strong></div>
+  <div class="col-sm-3"><strong>File Size</strong></div>
 </div>
 
 
@@ -16,7 +16,7 @@
 <img src="../../assets/Images/{{item['.tag']}}.png" class="img-icon">
 
   </div>
-  <div class="col-sm-7">
+  <div class="col-sm-6">
 {{item.name}}
   </div>
   <div class="col-sm-2">
@@ -24,6 +24,14 @@
   </div>
   <div class="col-sm-2">
     {{item.size}}
+  </div>
+  <div class="col-sm-1">
+    <div class="rating">
+      <span>☆</span>
+    </div>
+
+
+
   </div>
 
 </div>
