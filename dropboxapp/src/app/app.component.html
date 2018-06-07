@@ -1,10 +1,6 @@
-
-
-
-
 <div class="main-content">
   <button id="logout-button">Logout</button>
-  <button id="upload-button">Upload</button>
+  <input type="file" (change)="this.dataService.uploadFiles($event)" id="upload-button">
 
   <div id="datalist-container">
    <app-datalist></app-datalist>
