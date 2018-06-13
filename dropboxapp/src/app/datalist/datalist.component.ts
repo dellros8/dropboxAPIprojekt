@@ -10,7 +10,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 })
 export class DatalistComponent implements OnInit {
   itemArray = [];
-  breadcrumbs = [];
+  breadcrumbs = [""];
 
   constructor(private dataservice: DataService, private sanitizer: DomSanitizer) {
   }

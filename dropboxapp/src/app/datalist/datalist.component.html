@@ -14,7 +14,7 @@
 </div>
 
 
-<a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{" > " + breadcrumb}}</a>
+<a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
 
 <div id="itemArrayContainer">
   <div *ngFor="let item of itemArray" class="row datalist-items" (click)="openFile(item.path_lower, item['.tag'])">
