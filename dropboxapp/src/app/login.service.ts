@@ -9,7 +9,7 @@ export class LoginService implements CanActivate {
 
   constructor(private router: Router) { }
 
-  canActivate(): any {
+  canActivate(): boolean {
     if (localStorage.getItem("token") != null) {
       return true;
     } else {
