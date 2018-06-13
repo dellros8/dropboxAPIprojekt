@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+
 import {elementClassNamed} from '@angular/core/src/render3/instructions';
+
+import { DomSanitizer } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-datalist',
@@ -10,12 +13,12 @@ import {elementClassNamed} from '@angular/core/src/render3/instructions';
 export class DatalistComponent implements OnInit {
   itemArray = [];
   pathm = "";
-  breadcrumbs = [];
   staredfiles = [];
   showStared = false;
   theUser = this.dataservice.user;
+  breadcrumbs = [""];
 
-  constructor(private dataservice: DataService) {
+  constructor(private dataservice: DataService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -27,7 +30,7 @@ export class DatalistComponent implements OnInit {
     this.dataservice.stream
       .subscribe((files) => {
         this.itemArray = files;
-        console.log(files);
+
       });
 
   }
@@ -65,22 +68,33 @@ if(result === undefined) {
 
   }
 
-  download(path, filetype, filename) {
+  navigate(breadcrumb) {
+    let index = 0;
+    for (let i = 0; i < this.breadcrumbs.length; i++) {
+      if (breadcrumb !== this.breadcrumbs[i]) {
+        index += 1
+      } else {
+        break
+      }
+    }
+
+    const tjabba = this.breadcrumbs.slice(0, index + 1);
+    this.breadcrumbs = tjabba;
+    const tjena = tjabba.join("/");
+    this.dataservice.pathm = tjena;
+    this.dataservice.getFiles()
+  }
+
+  openFile(path, filetype) {
     if (filetype === 'file') {
       this.dataservice.downloadFile(path);
     } else if (filetype === 'folder') {
 
-      this.pathm = path;
-      this.breadcrumbs = path.split('/');
 
-      this.dataservice.dbx.filesListFolder({ path: this.pathm })
-        .then((response) => {
-          this.dataservice.list = response.entries;
-          this.dataservice.stream.next(this.dataservice.list);
-        })
-        .catch((e) => {
-          console.error(e);
-        })
+      this.dataservice.pathm = path;
+      this.breadcrumbs = this.dataservice.pathm.split("/");
+
+      this.dataservice.getFiles()
 
     } else {
       alert("couldn't download or locate folder");
@@ -88,17 +102,23 @@ if(result === undefined) {
   }
 
   previousFolder() {
-    const lol = this.pathm.split("/");
+    const lol = this.dataservice.pathm.split("/");
     lol.splice(-1, 1);
     this.breadcrumbs = lol;
     const wtf = lol.join("/");
-    this.pathm = wtf;
 
-    this.dataservice.dbx.filesListFolder({ path: this.pathm })
-        .then((response) => {
-          this.dataservice.list = response.entries;
-          this.dataservice.stream.next(this.dataservice.list);
-        })
+    this.dataservice.pathm = wtf;
+
+    this.dataservice.getFiles()
+  }
+
+  sanitize(url) {
+    return this.sanitizer.bypassSecurityTrustUrl(url)
+  }
+
+  hasThumbnail(url) {
+    return url != undefined
+
   }
 }
 

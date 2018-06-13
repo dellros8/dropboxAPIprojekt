@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import 'isomorphic-fetch';
@@ -6,12 +6,14 @@ import 'isomorphic-fetch';
 const Dropbox = require('dropbox').Dropbox;
 
 import { BehaviorSubject } from 'rxjs';
+import { FileDetector } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
   stream;
+  public pathm = "";
   dbx;
   list = [];
 user = 'filip';
@@ -25,46 +27,44 @@ user = 'filip';
   }
 
   getFiles() {
-    this.dbx.filesListFolder({ path: '' })
+    this.dbx.filesListFolder({ path: this.pathm })
       .then((response) => {
         this.list = response.entries;
         this.stream.next(this.list);
 
-      });
+
+        Promise.all(this.list.map((entries: any) => {
+          if (entries.name.endsWith("png") || entries.name.endsWith("jpg")) {
+            return this.dbx.filesGetThumbnail({ path: entries.path_lower })
+              .then((image) => {
+                entries.thumbnail = URL.createObjectURL(image.fileBlob);
+                return entries;
+              })
+          } else {
+            return Promise.resolve(entries);
+          }
+        }))
+          .then(() => {
+            this.stream.next(this.list)
+          })
+      })
   }
 
 
   downloadFile(path) {
-    // const ACCESS_TOKEN = (<HTMLInputElement> document.getElementById('access-token')).value;
-    // const SHARED_LINK = (<HTMLInputElement> document.getElementById('shared-link')).value;
-
-    this.dbx.filesGetTemporaryLink({path: path})
-      .then(function(data) {
-        // NOTE: The Dropbox SDK specification does not include a fileBlob
-        // field on the FileLinkMetadataReference type, so it is missing from
-        // the TypeScript type. This field is injected by the Dropbox SDK.
-
+    this.dbx.filesGetTemporaryLink({ path: path })
+      .then(function (data) {
         window.open(data.link, '_blank');
-        const downloadUrl = URL.createObjectURL((<any> data).fileBlob);
-        const downloadButton = document.createElement('a');
-        downloadButton.setAttribute('href', downloadUrl);
-        downloadButton.setAttribute('download', data.name);
-        downloadButton.setAttribute('class', 'button');
-        downloadButton.innerText = 'Download: ' + data.name;
-        document.getElementById('results').appendChild(downloadButton);
-
       })
-      .catch(function(error) {
+      .catch(function (error) {
       });
     return false;
   }
 
-
   uploadFiles(event) {
     this.uploadFile = event.target.files;
     let file = this.uploadFile[0];
-
-    this.dbx.filesUpload({ path: '/' + file.name, contents: file })
+    this.dbx.filesUpload({ path: this.pathm + "/" + file.name, contents: file })
       .then(() => {
         console.log('uploaded file!!');
       })
@@ -72,8 +72,4 @@ user = 'filip';
         console.error(error);
       });
   }
-
-
-
-
 }
