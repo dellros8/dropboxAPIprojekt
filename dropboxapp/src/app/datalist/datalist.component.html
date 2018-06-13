@@ -2,6 +2,8 @@
 
   previous folder</button>
 <button class="dataList-button" [ngClass]="{'active': showStared == true }" (click)="showHideStared()">Show only stared files</button>
+<br><br>
+<a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
 
 <div class="row" id="datalist-titels">
 
@@ -25,7 +27,6 @@
 
 
 <div *ngIf="showStared === false" class="itemArrayContainer">
-    <a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
   <div *ngFor="let item of itemArray" class="row datalist-items">
 
     <div class="col-sm-1">
@@ -53,7 +54,6 @@
 
 
 <div *ngIf="showStared === true" class="itemArrayContainer">
-    <a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
   <div *ngFor="let item of itemArray">
 
     <div *ngIf="findInStarArray(item.id, staredfiles)" class="row datalist-items">
