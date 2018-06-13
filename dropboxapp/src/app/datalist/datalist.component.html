@@ -39,10 +39,10 @@
         {{item.name}}
       </div>
       <div class="col-sm-2">
-        {{item.client_modified}}
+          {{changeTimestamp(item.client_modified)}}   <!--{{item.client_modified}}-->
       </div>
       <div class="col-sm-2">
-        {{item.size}}
+      <span *ngIf="item.size > 0">{{ calculateFilesize(item.size) }}</span>
       </div>
       <div class="col-sm-1">
         <div [ngClass]="{'stared': findInStarArray(item.id, staredfiles)}" (click)="starfile(item.id)">

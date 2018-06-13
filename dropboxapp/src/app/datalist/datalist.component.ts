@@ -35,13 +35,31 @@ export class DatalistComponent implements OnInit {
       });
 
   }
-
-  showHideStared() {
-    if (this.showStared === false) {
-      this.showStared = true;
-    } else {
-      this.showStared = false;
+  changeTimestamp(timestamp) {
+    if (!timestamp) {
+      return timestamp;
     }
+
+  
+let res = timestamp.split('T').join(' ');
+res = res.split('Z').join(' ');
+return res;
+
+
+
+
+  }
+  calculateFilesize(bytes) {
+    if(bytes === 0) { return '0 Bytes';}
+    const k = 1024,
+      dm = 2,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+
+  }
+  showHideStared() {
+    this.showStared === false ? this.showStared = true : this.showStared = false;
   }
   findInStarArray(fileId, fileArray) {
     const result = fileArray.find( theId => theId.fileId === fileId );
@@ -64,10 +82,6 @@ if(result === undefined) {
   localStorage.setItem(this.theUser, JSON.stringify(this.staredfiles));
   console.log('removed file', this.staredfiles);
 }
-  }
-  starStyling(fileId) {
-
-
   }
 
   navigate(breadcrumb) {
