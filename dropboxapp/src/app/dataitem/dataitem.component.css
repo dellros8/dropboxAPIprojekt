@@ -1,0 +1,63 @@
+#datalist-titels {
+    padding: 20px 0px 20px 10px ;
+  
+  }
+  
+  .datalist-items {
+    padding: 20px 0px 20px 0px;
+    margin: 0px 0px 0px 0px;
+    border-bottom: 1px  solid;
+  
+  }
+  .datalist-items:hover {
+    border: none;
+    background-color: #9c80cf;
+  
+  }
+  .pointer:hover {
+    cursor: pointer;
+  
+  }
+  .img-icon {
+    width: 50px;
+    height: 50px;
+  }
+  .itemArrayContainer {
+    overflow-y: scroll;
+    height: 83%;
+  }
+  
+  .dataList-button {
+  
+    background-color: darkblue;
+    color: white;
+    border: none;
+    margin: 10px 5px 0px 5px;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .dataList-button:hover {
+    background-color: #0000d9;
+    cursor: pointer;
+  }
+  .active {
+    background-color: #0000d9;
+    cursor: pointer;
+  }
+  
+  
+  .unstared {
+    unicode-bidi: bidi-override;
+    direction: rtl;
+  }
+  .unstared > span {
+    display: inline-block;
+    position: relative;
+    width: 2em;
+  }
+  .stared > span:before,
+  .stared > span ~ span:before {
+    content: "\2605";
+    position: absolute;
+  }
+  

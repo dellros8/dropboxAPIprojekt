@@ -1,0 +1,9 @@
+.connectdiv {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.connectknapp {
+    padding: 15px;
+    background-color: lightgreen;
+}

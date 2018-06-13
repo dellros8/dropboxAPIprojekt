@@ -22,6 +22,10 @@ export class LoginComponent implements OnInit {
           const authTokenParams = params[0].split("=");
           const authToken = authTokenParams[authTokenParams.length-1];
           localStorage.setItem("token", authToken);
+          if (localStorage.getItem("token") === "The+user+chose+not+to+give+your+app+access+to+their+Dropbox+account.") {
+            localStorage.removeItem("token");
+          }
+          console.log("token", authToken);
           this.router.navigate([""]);
         } else {
           this.router.navigate(["login"]);
@@ -32,7 +36,7 @@ export class LoginComponent implements OnInit {
 
 
   login() {
-    const authUrl = "http"
+    window.location.href = "https://www.dropbox.com/oauth2/authorize?response_type=token&client_id=g0ni8qp26hhwbcy&redirect_uri=http://localhost:4200/login"
   }
 }
 

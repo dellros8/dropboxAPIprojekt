@@ -22,7 +22,8 @@ export class DataService {
 
 
   constructor() {
-    this.dbx = new Dropbox({ accessToken: 'o6_f4NF_pIAAAAAAAAAABz8hX_Q0CxwZQag2M9E5v0-KleP2Bzp1ynSv5nBaV25v' });
+    const authToken = localStorage.getItem("token");
+    this.dbx = new Dropbox({ accessToken: authToken });
     this.stream = new BehaviorSubject(this.list);
   }
 
