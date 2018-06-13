@@ -66,7 +66,7 @@ user = 'filip';
     let file = this.uploadFile[0];
     this.dbx.filesUpload({ path: this.pathm + "/" + file.name, contents: file })
       .then(() => {
-        console.log('uploaded file!!');
+        alert("File uploaded, please reload page")
       })
       .catch(function (error) {
         console.error(error);

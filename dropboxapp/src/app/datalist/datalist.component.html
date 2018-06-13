@@ -34,6 +34,7 @@
       <img *ngIf="hasThumbnail(item.thumbnail)" [src]=sanitize(item.thumbnail) class="img-icon">
         <img *ngIf="!hasThumbnail(item.thumbnail)" src="../../assets/Images/{{item['.tag']}}.png" class="img-icon">
     </div>
+
     <div class="col-sm-6 pointer" (click)="openFile(item.path_lower, item['.tag'])">
         {{item.name}}
       </div>

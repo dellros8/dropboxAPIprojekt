@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -7,41 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private actvRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    
+    this.actvRoute.url
+      .subscribe(() => {
+
+        const currentUrl = this.router.url;
+
+        if (currentUrl.indexOf("&") !== -1) {
+
+          const params = currentUrl.split("&");
+          const authTokenParams = params[0].split("=");
+          const authToken = authTokenParams[authTokenParams.length-1];
+          localStorage.setItem("token", authToken);
+          this.router.navigate([""]);
+        } else {
+          this.router.navigate(["login"]);
+        }
+      })
   }
-  // ngOnInit() {
-  //   this.activatedRoute.url
-  //     .subscribe(() => {
-
-  //       const currentUrl = this.router.url;
-  //       if (currentUrl.indexOf("&") !== -1) {
-  //         const params = currentUrl.split("&");
-  //         const authTokenParams = params.split("=");
-  //         const authToken = authTokenParams[1];
-  //         localStorage.setItem("token", authToken);
-  //         this.router.navigate(["fileList"]);
-  //       } else {
-  //         this.router.navigate(["login"]);
-  //       }
-  //     })
-  // }
 
 
 
-  // login() {
-  //   const authUrl = "http"
-  // }
-  // getFiles() {
-  //   const authToken = localStorage.getItem("token");
-  //   const option = {
-  //     "headers": new HttpHeaders({
-  //       "Authorization": authToken
-  //     })
-  //   }
-  //   return this.http.get("files", options);
-  // }
+  login() {
+    const authUrl = "http"
+  }
 }
 

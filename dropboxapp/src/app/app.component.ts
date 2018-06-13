@@ -10,19 +10,12 @@ import { DatalistComponent } from './datalist/datalist.component';
 })
 export class AppComponent {
 
-  files = [];
-
   constructor(private dataService: DataService) {
-    this.dataService.getFiles();
   }
   showHide() {
 
   }
   ngOnInit() {
-    this.dataService.stream
-    .subscribe((files) => {
-      this.files = files;
-    })
   }
 
 }
