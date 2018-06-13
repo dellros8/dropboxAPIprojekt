@@ -35,6 +35,7 @@ export class DatalistComponent implements OnInit {
       });
 
   }
+
   showHideStared() {
     if (this.showStared === false) {
       this.showStared = true;

@@ -16,7 +16,7 @@ export class DataService {
   public pathm = "";
   dbx;
   list = [];
-user = 'filip';
+  user = 'filip';
 
   uploadFile: FileList;
 
