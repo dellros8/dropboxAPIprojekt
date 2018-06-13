@@ -10,9 +10,9 @@ import { DataService } from "../data.service";
 })
 export class DatalistComponent {
 
-  constructor(private loginservice: LoginService, private dataservice: DataService) {
+  constructor(private loginservice: LoginService, private dataService: DataService) {
 
-    this.dataservice.getFiles();
+    this.dataService.getFiles();
   }
 
   ngOnInit() {

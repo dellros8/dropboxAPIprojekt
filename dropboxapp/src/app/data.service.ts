@@ -22,9 +22,13 @@ export class DataService {
 
 
   constructor() {
+    this.updateAccessToken()
+    this.stream = new BehaviorSubject(this.list);
+  }
+
+  updateAccessToken() {
     const authToken = localStorage.getItem("token");
     this.dbx = new Dropbox({ accessToken: authToken });
-    this.stream = new BehaviorSubject(this.list);
   }
 
   getFiles() {

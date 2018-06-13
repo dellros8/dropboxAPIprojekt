@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from "@angular/router";
+import { DataService } from "../data.service";
 
 @Component({
   selector: 'app-login',
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router, private actvRoute: ActivatedRoute) { }
+  constructor(private router: Router, private actvRoute: ActivatedRoute, private dataService: DataService) { }
 
   ngOnInit() {
     this.actvRoute.url
@@ -20,12 +21,12 @@ export class LoginComponent implements OnInit {
 
           const params = currentUrl.split("&");
           const authTokenParams = params[0].split("=");
-          const authToken = authTokenParams[authTokenParams.length-1];
+          const authToken = authTokenParams[authTokenParams.length - 1];
           localStorage.setItem("token", authToken);
           if (localStorage.getItem("token") === "The+user+chose+not+to+give+your+app+access+to+their+Dropbox+account.") {
             localStorage.removeItem("token");
           }
-          console.log("token", authToken);
+          this.dataService.updateAccessToken();
           this.router.navigate([""]);
         } else {
           this.router.navigate(["login"]);

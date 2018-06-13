@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 
-import {elementClassNamed} from '@angular/core/src/render3/instructions';
+import { elementClassNamed } from '@angular/core/src/render3/instructions';
 
 import { DomSanitizer } from "@angular/platform-browser";
 
@@ -26,7 +26,6 @@ export class DataitemComponent implements OnInit {
     if (localStorage.getItem(this.theUser) !== null) {
       this.staredfiles = JSON.parse(localStorage.getItem(this.theUser));
     }
-    console.log(this.staredfiles, 'staredFiles');
     this.dataservice.getFiles();
     this.dataservice.stream
       .subscribe((files) => {
@@ -43,30 +42,45 @@ export class DataitemComponent implements OnInit {
     }
   }
   findInStarArray(fileId, fileArray) {
-    const result = fileArray.find( theId => theId.fileId === fileId );
-    if(result !== undefined) {
+    const result = fileArray.find(theId => theId.fileId === fileId);
+    if (result !== undefined) {
       return true;
     }
 
   }
-  starfile(fileId) {
-    const result = this.staredfiles.find( theId => theId.fileId === fileId );
-if(result === undefined) {
-  localStorage.removeItem(this.dataservice.user);
-  this.staredfiles.push({fileId});
-  console.log('Added file', this.staredfiles);
-  localStorage.setItem(this.theUser, JSON.stringify(this.staredfiles));
-} else {
-  localStorage.removeItem(this.dataservice.user);
-  this.staredfiles = this.staredfiles.filter(function(el){
-    return el.fileId !== fileId;});
-  localStorage.setItem(this.theUser, JSON.stringify(this.staredfiles));
-  console.log('removed file', this.staredfiles);
-}
+
+  changeTimestamp(timestamp) {
+    if (!timestamp) {
+      return timestamp;
+    }
+    let res = timestamp.split('T').join(' ');
+    res = res.split('Z').join(' ');
+    return res;
   }
-  starStyling(fileId) {
+  calculateFilesize(bytes) {
+    if (bytes === 0) { return '0 Bytes'; }
+    const k = 1024,
+      dm = 2,
+      sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+      i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+
+  }
 
 
+  starfile(fileId) {
+    const result = this.staredfiles.find(theId => theId.fileId === fileId);
+    if (result === undefined) {
+      localStorage.removeItem(this.dataservice.user);
+      this.staredfiles.push({ fileId });
+      localStorage.setItem(this.theUser, JSON.stringify(this.staredfiles));
+    } else {
+      localStorage.removeItem(this.dataservice.user);
+      this.staredfiles = this.staredfiles.filter(function (el) {
+        return el.fileId !== fileId;
+      });
+      localStorage.setItem(this.theUser, JSON.stringify(this.staredfiles));
+    }
   }
 
   navigate(breadcrumb) {
