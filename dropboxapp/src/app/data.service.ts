@@ -14,6 +14,7 @@ export class DataService {
   stream;
   dbx;
   list = [];
+user = 'filip';
 
   uploadFile: FileList;
 
@@ -30,9 +31,8 @@ export class DataService {
         this.stream.next(this.list);
 
       });
-
-
   }
+
 
   downloadFile(path) {
     // const ACCESS_TOKEN = (<HTMLInputElement> document.getElementById('access-token')).value;
