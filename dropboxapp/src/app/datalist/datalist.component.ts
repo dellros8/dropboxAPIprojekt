@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
+import { DomSanitizer } from "@angular/platform-browser";
+
 
 @Component({
   selector: 'app-datalist',
@@ -10,8 +12,7 @@ export class DatalistComponent implements OnInit {
   itemArray = [];
   breadcrumbs = [""];
 
-  constructor(private dataservice: DataService) {
-    this.dataservice.getFiles();
+  constructor(private dataservice: DataService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class DatalistComponent implements OnInit {
       .subscribe((files) => {
         this.itemArray = files;
       });
+      
   }
   navigate(breadcrumb) {
     let index = 0;
@@ -33,29 +35,20 @@ export class DatalistComponent implements OnInit {
     const tjabba = this.breadcrumbs.slice(0, index+1);
     this.breadcrumbs = tjabba;
     const tjena = tjabba.join("/");
+    this.dataservice.pathm = tjena;
 
-    this.dataservice.dbx.filesListFolder({ path: tjena })
-        .then((response) => {
-          this.dataservice.list = response.entries;
-          this.dataservice.stream.next(this.dataservice.list);
-        })
+    this.dataservice.getFiles()
   }
-  download(path, filetype, filename) {
+
+  openFile(path, filetype) {
     if (filetype === 'file') {
       this.dataservice.downloadFile(path);
     } else if (filetype === "folder") {
 
       this.dataservice.pathm = path;
-      this.breadcrumbs = path.split("/"); 
+      this.breadcrumbs = this.dataservice.pathm.split("/"); 
 
-      this.dataservice.dbx.filesListFolder({ path: this.dataservice.pathm })
-        .then((response) => {
-          this.dataservice.list = response.entries;
-          this.dataservice.stream.next(this.dataservice.list);
-        })
-        .catch((e) => {
-          console.error(e);
-        })
+      this.dataservice.getFiles()
 
     } else {
       alert("couldn't download or locate folder");
@@ -69,15 +62,15 @@ export class DatalistComponent implements OnInit {
     const wtf = lol.join("/");
     this.dataservice.pathm = wtf;
   
-    this.dataservice.dbx.filesListFolder({ path: this.dataservice.pathm })
-        .then((response) => {
-          this.dataservice.list = response.entries;
-          this.dataservice.stream.next(this.dataservice.list);
-        })
+    this.dataservice.getFiles()
   }
 
-  pathDisplay() {
-    this.breadcrumbs.join(">");
+  sanitize(url) {
+    return this.sanitizer.bypassSecurityTrustUrl(url)
+  }
+
+  hasThumbnail(url) {
+    return url != undefined
   }
 }
 

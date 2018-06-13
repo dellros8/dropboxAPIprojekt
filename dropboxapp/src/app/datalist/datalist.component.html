@@ -6,14 +6,15 @@
 </div>
 
 
-<div *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)">{{breadcrumb}}</div>
+<a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{" > " + breadcrumb}}</a>
 
 <div id="itemArrayContainer">
-<div *ngFor="let item of itemArray" class="row datalist-items" (click)="download(item.path_lower, item['.tag'])">
+<div *ngFor="let item of itemArray" class="row datalist-items" (click)="openFile(item.path_lower, item['.tag'])">
 
   <div class="col-sm-1">
    <!-- <img src="{{item.path_lower}}" class="img-icon">-->
-<img src="../../assets/Images/{{item['.tag']}}.png" class="img-icon">
+<img *ngIf="hasThumbnail(item.thumbnail)" [src]=sanitize(item.thumbnail) class="img-icon">
+<img *ngIf="!hasThumbnail(item.thumbnail)" src="../../assets/Images/{{item['.tag']}}.png" class="img-icon">
 
   </div>
   <div class="col-sm-6">
@@ -36,5 +37,6 @@
 
 </div>
 
-<button (click)="previousFolder()">previous folder</button>
 </div>
+
+<button (click)="previousFolder()">previous folder</button>
