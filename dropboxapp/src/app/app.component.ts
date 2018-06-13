@@ -10,16 +10,9 @@ import { DataService } from './data.service';
 })
 export class AppComponent {
 
-  files = [];
-
   constructor(private dataService: DataService) {
-    this.dataService.getFiles();
   }
   ngOnInit() {
-    this.dataService.stream
-    .subscribe((files) => {
-      this.files = files;
-    })
   }
 
 }
