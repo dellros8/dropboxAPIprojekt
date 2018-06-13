@@ -8,11 +8,12 @@ import { UploadComponent } from './upload/upload.component';
 import { DataitemComponent } from './dataitem/dataitem.component';
 
 import { DataService } from "./data.service";
-import { RouterModule, Routes } from "@angular/router";
+import { RouterModule, Routes, CanActivate } from "@angular/router";
+import { LoginService } from './login.service';
 
 const route: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: '', component: DatalistComponent}
+  { path: '',  canActivate: [LoginService], component: DatalistComponent },
+  { path: 'login', component: LoginComponent }
 ];
 
 @NgModule({

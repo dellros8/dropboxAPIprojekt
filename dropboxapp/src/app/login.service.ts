@@ -1,10 +1,26 @@
 import { Injectable } from '@angular/core';
+import { Router, CanActivate } from "@angular/router";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class LoginService implements CanActivate {
 
-  
-  constructor() { }
+  constructor(private router: Router) { }
+
+  canActivate(): any {
+    if (localStorage.getItem("token") != null) {
+      return true;
+    } else {
+      this.router.navigate(["login"]);
+      return false;
+    }
+  }
+
+  logout() {
+    localStorage.removeItem("token");
+    this.router.navigate(["login"]);
+  }
+
 }

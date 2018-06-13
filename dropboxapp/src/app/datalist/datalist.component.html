@@ -1,86 +1,15 @@
-<button class="dataList-button" (click)="previousFolder()">
+<nav>
+    <button (click)="this.loginservice.logout()" id="logout-button">Logout</button>
+    <label id="#bb"> Upload File
+      <input type="file" id="File" (change)="this.dataService.uploadFiles($event)"  size="60" >
+    </label>
 
-  previous folder</button>
-<button class="dataList-button" [ngClass]="{'active': showStared == true }" (click)="showHideStared()">Show only stared files</button>
+  </nav>
 
-<div class="row" id="datalist-titels">
+  <div class="main-content">
+  <div id="datalist-container">
+     <app-dataitem></app-dataitem>
+  </div>
 
-  <div class="col-sm-1">
-    <strong>Filetype</strong>
-  </div>
-  <div class="col-sm-6">
-    <strong>Filename</strong>
-  </div>
-  <div class="col-sm-2">
-    <strong>Last Modified</strong>
-  </div>
-  <div class="col-sm-3">
-    <strong>File Size</strong>
-  </div>
 </div>
-
-
-
-
-
-
-<div *ngIf="showStared === false" class="itemArrayContainer">
-    <a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
-  <div *ngFor="let item of itemArray" class="row datalist-items">
-
-    <div class="col-sm-1">
-      <!-- <img src="{{item.path_lower}}" class="img-icon">-->
-      <img *ngIf="hasThumbnail(item.thumbnail)" [src]=sanitize(item.thumbnail) class="img-icon">
-        <img *ngIf="!hasThumbnail(item.thumbnail)" src="../../assets/Images/{{item['.tag']}}.png" class="img-icon">
-    </div>
-
-    <div class="col-sm-6 pointer" (click)="openFile(item.path_lower, item['.tag'])">
-        {{item.name}}
-      </div>
-      <div class="col-sm-2">
-        {{item.client_modified}}
-      </div>
-      <div class="col-sm-2">
-        {{item.size}}
-      </div>
-      <div class="col-sm-1">
-        <div [ngClass]="{'stared': findInStarArray(item.id, staredfiles)}" (click)="starfile(item.id)">
-          <span>☆</span>
-        </div>
-      </div>
-
-  </div>
-</div>
-
-
-<div *ngIf="showStared === true" class="itemArrayContainer">
-    <a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
-  <div *ngFor="let item of itemArray">
-
-    <div *ngIf="findInStarArray(item.id, staredfiles)" class="row datalist-items">
-
-      <div class="col-sm-1">
-        <!-- <img src="{{item.path_lower}}" class="img-icon">-->
-        <img *ngIf="hasThumbnail(item.thumbnail)" [src]=sanitize(item.thumbnail) class="img-icon">
-        <img *ngIf="!hasThumbnail(item.thumbnail)" src="../../assets/Images/{{item['.tag']}}.png" class="img-icon">
-
-      </div>
-      <div class="col-sm-6 pointer" (click)="openFile(item.path_lower, item['.tag'])">
-        {{item.name}}
-      </div>
-      <div class="col-sm-2">
-        {{item.client_modified}}
-      </div>
-      <div class="col-sm-2">
-        {{item.size}}
-      </div>
-      <div class="col-sm-1">
-        <div [ngClass]="{'stared': findInStarArray(item.id, staredfiles)}" (click)="starfile(item.id)">
-          <span>☆</span>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</div>
+ <footer></footer>
