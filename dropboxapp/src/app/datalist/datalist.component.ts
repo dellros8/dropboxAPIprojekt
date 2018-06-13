@@ -19,6 +19,7 @@ export class DatalistComponent implements OnInit {
   breadcrumbs = [""];
 
   constructor(private dataservice: DataService, private sanitizer: DomSanitizer) {
+    this.dataservice.getFiles();
   }
 
   ngOnInit() {
@@ -103,11 +104,13 @@ if(result === undefined) {
 
   previousFolder() {
     const lol = this.dataservice.pathm.split("/");
-    lol.splice(-1, 1);
-    this.breadcrumbs = lol;
-    const wtf = lol.join("/");
 
-    this.dataservice.pathm = wtf;
+    if (lol.length > 1) {
+      lol.splice(-1, 1);
+      this.breadcrumbs = lol;
+      const wtf = lol.join("/");
+      this.dataservice.pathm = wtf;
+    }
 
     this.dataservice.getFiles()
   }
