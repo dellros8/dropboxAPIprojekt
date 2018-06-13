@@ -32,23 +32,21 @@ export class DataService {
         this.stream.next(this.list);
 
         Promise.all(this.list.map((entries: any) => {
-            if (entries.name.endsWith("png") || entries.name.endsWith("jpg")) {
-              return this.dbx.filesGetThumbnail({ path: entries.path_lower })
-                .then((image) => {
-                  entries.thumbnail = URL.createObjectURL(image.fileBlob);
-                  return entries;
-                })
-            } else {
-              return Promise.resolve(entries);
-            }
-          })).then(() => {
-        this.stream.next(this.list)
+          if (entries.name.endsWith("png") || entries.name.endsWith("jpg")) {
+            return this.dbx.filesGetThumbnail({ path: entries.path_lower })
+              .then((image) => {
+                entries.thumbnail = URL.createObjectURL(image.fileBlob);
+                return entries;
+              })
+          } else {
+            return Promise.resolve(entries);
+          }
+        }))
+          .then(() => {
+            this.stream.next(this.list)
           })
       })
-
   }
-
-
 
   downloadFile(path) {
     this.dbx.filesGetTemporaryLink({ path: path })
@@ -59,7 +57,6 @@ export class DataService {
       });
     return false;
   }
-
 
   uploadFiles(event) {
     this.uploadFile = event.target.files;
@@ -72,5 +69,4 @@ export class DataService {
         console.error(error);
       });
   }
-
 }

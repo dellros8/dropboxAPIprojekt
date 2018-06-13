@@ -10,7 +10,7 @@ import { DomSanitizer } from "@angular/platform-browser";
 })
 export class DatalistComponent implements OnInit {
   itemArray = [];
-  breadcrumbs = [""];
+  breadcrumbs = [];
 
   constructor(private dataservice: DataService, private sanitizer: DomSanitizer) {
   }
@@ -20,7 +20,7 @@ export class DatalistComponent implements OnInit {
       .subscribe((files) => {
         this.itemArray = files;
       });
-      
+
   }
   navigate(breadcrumb) {
     let index = 0;
@@ -32,11 +32,10 @@ export class DatalistComponent implements OnInit {
       }
     }
 
-    const tjabba = this.breadcrumbs.slice(0, index+1);
+    const tjabba = this.breadcrumbs.slice(0, index + 1);
     this.breadcrumbs = tjabba;
     const tjena = tjabba.join("/");
     this.dataservice.pathm = tjena;
-
     this.dataservice.getFiles()
   }
 
@@ -46,7 +45,7 @@ export class DatalistComponent implements OnInit {
     } else if (filetype === "folder") {
 
       this.dataservice.pathm = path;
-      this.breadcrumbs = this.dataservice.pathm.split("/"); 
+      this.breadcrumbs = this.dataservice.pathm.split("/");
 
       this.dataservice.getFiles()
 
@@ -61,7 +60,7 @@ export class DatalistComponent implements OnInit {
     this.breadcrumbs = lol;
     const wtf = lol.join("/");
     this.dataservice.pathm = wtf;
-  
+
     this.dataservice.getFiles()
   }
 
