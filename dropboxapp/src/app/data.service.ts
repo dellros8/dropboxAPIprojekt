@@ -16,6 +16,7 @@ export class DataService {
   public pathm = "";
   dbx;
   list = [];
+user = 'filip';
 
   uploadFile: FileList;
 
@@ -30,6 +31,7 @@ export class DataService {
       .then((response) => {
         this.list = response.entries;
         this.stream.next(this.list);
+
 
         Promise.all(this.list.map((entries: any) => {
           if (entries.name.endsWith("png") || entries.name.endsWith("jpg")) {
@@ -47,6 +49,7 @@ export class DataService {
           })
       })
   }
+
 
   downloadFile(path) {
     this.dbx.filesGetTemporaryLink({ path: path })
