@@ -1,6 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css);
 body {
-  background: #9c80cf;
+  /*background: #9c80cf;*/
+background: url("/assets/Images/background.jpg") no-repeat;
+
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-family: 'Lobster', cursive;
+}
+h3 {
+  font-family: 'Lobster', cursive;
 }

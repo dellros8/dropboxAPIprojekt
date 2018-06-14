@@ -1,6 +1,6 @@
 <button class="dataList-button" (click)="previousFolder()">
-
   previous folder</button>
+<h1 id="freebox">FreeBox</h1>
 <button class="dataList-button" [ngClass]="{'active': showStared == true }" (click)="showHideStared()">Show only stared files</button>
 <br><br>
 <a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>

@@ -1,22 +1,22 @@
 #datalist-titels {
     padding: 20px 0px 20px 10px ;
-  
+
   }
-  
+
   .datalist-items {
     padding: 20px 0px 20px 0px;
     margin: 0px 0px 0px 0px;
     border-bottom: 1px  solid;
-  
+
   }
   .datalist-items:hover {
     border: none;
     background-color: #9c80cf;
-  
+
   }
   .pointer:hover {
     cursor: pointer;
-  
+
   }
   .img-icon {
     width: 50px;
@@ -25,27 +25,31 @@
   .itemArrayContainer {
     overflow-y: scroll;
     height: 53.6vh;
+
   }
-  
+#freebox{
+  float: right;
+}
   .dataList-button {
-  
-    background-color: darkblue;
+
+    background-color: #0000d9;
     color: white;
     border: none;
     margin: 10px 5px 0px 5px;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
+    font-weight: 400;
   }
   .dataList-button:hover {
-    background-color: #0000d9;
+    background-color: darkblue;
     cursor: pointer;
   }
   .active {
-    background-color: #0000d9;
+    background-color: darkblue;
     cursor: pointer;
   }
-  
-  
+
+
   .unstared {
     unicode-bidi: bidi-override;
     direction: rtl;
@@ -60,4 +64,3 @@
     content: "\2605";
     position: absolute;
   }
-  

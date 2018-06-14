@@ -1,9 +1,23 @@
 .connectdiv {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
+text-align: center;
+    border-radius: 20px;
+    margin: 150px 32%;
+    width: 36%;
+    height: 250px;
+    background-color: rgba(255, 255, 255, 0.8);
 }
 .connectknapp {
     padding: 15px;
-    background-color: lightgreen;
+    margin: 20px 22%;
+
+    background-color: limegreen;
+  border-radius: 0px 15px;
+
+}
+.connectknapp:hover {
+background-color: #72e400;
+  cursor: pointer;
+}
+.connectdiv h3 {
+padding-top: 30px;
 }
