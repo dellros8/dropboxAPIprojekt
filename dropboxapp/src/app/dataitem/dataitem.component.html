@@ -1,9 +1,9 @@
-<button class="dataList-button" (click)="previousFolder()">
-  previous folder</button>
 <h1 id="freebox">FreeBox</h1>
-<button class="dataList-button" [ngClass]="{'active': showStared == true }" (click)="showHideStared()">Show only stared files</button>
+<button class="dataList-button" [ngClass]="{'active': showStared == true }" (click)="showHideStared()">Show Favourites</button>
 <br><br>
+<button class="dataList-button" (click)="previousFolder()"><< Previous Folder</button>
 <a *ngFor="let breadcrumb of breadcrumbs" (click)="navigate(breadcrumb)" href="javascript:void(0)">{{ (breadcrumb == "") ? "Dropbox" : " > " + breadcrumb }}</a>
+
 
 <div class="row" id="datalist-titels">
 
